@@ -27,6 +27,7 @@ while(true) {
             }
             echo date("Y-m-d H:i:s") . ":start job($action) from [$enqueuedAt]\n";
             //echo "$command\n";
+            $output = [];
             exec("bash $command 2>&1", $output, $status);
             if (!empty($status)) {
                 throw new Exception("command($command) fail=>" . print_r($output, 1) . "\n");
