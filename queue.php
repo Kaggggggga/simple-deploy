@@ -20,7 +20,7 @@ while(true) {
                     $command = __DIR__ . "/scripts/$action.sh $workDir $service";
                     break;
                 case "build":
-                    $command = __DIR__ . "/scripts/$action.sh $workDir $dockerRegistry $image";
+                    $command = __DIR__ . "/scripts/$action.sh $workDir $image $dockerRegistry";
                     break;
                 default:
                     throw new Exception("unknown action=>$value");
