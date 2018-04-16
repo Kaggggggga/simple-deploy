@@ -32,6 +32,18 @@ while(true) {
                 throw new Exception("command($command) fail=>" . print_r($output, 1) . "\n");
             }
             echo date("Y-m-d H:i:s") . ":finished job($action) from [$enqueuedAt]" . print_r($output, 1) . "\n";
+
+            //post action
+            switch ($action) {
+                case "build":
+                    // push a deploy job after build
+                    $actionDeploy = json_encode(["deploy", time()]);
+                    redis()->lpush(env("QUEUE_NAME"),[$actionDeploy]);
+                    break;
+                case "deploy":
+                default:
+                    break;
+            }
         } catch (Exception $e) {
             $message = $e->getMessage();
             echo date("Y-m-d H:i:s") . ":failed=>$message\n";
