@@ -35,7 +35,7 @@ function redis()
 {
     $redis = new Predis\Client([
         'host'   => env("REDIS_HOST"),
-        'prefix' => env("REDIS_PREFIX"),
+        'prefix' => env("APP_KEY"),
     ]);
     return $redis;
 }
